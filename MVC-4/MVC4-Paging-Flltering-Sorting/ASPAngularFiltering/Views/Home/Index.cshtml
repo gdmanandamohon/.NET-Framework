@@ -1,0 +1,67 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html ng-app="NgApp">
+
+<head>
+  <link data-require="bootstrap-css@2.3.2" data-semver="2.3.2" rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" />
+  <script  src="~/Scripts/angular.js"></script>
+  <script data-require="angular-ui-bootstrap@0.3.0" data-semver="0.3.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.3.0.min.js"></script>
+  <script src="~/Scripts/written/controller.js"></script>
+</head>
+
+<body ng-controller="TodoController">
+  <h1>Todos</h1>
+  <h4>{{todos.length}} remain</h4>
+    <ul>
+        <li ng-repeat="todo in filteredTodos">{{todo.FullName}}</li>
+    </ul>
+
+    Ananda
+     <form>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                <input type="text" class="form-control" placeholder="Search" ng-model="searchFish">
+            </div>
+        </div>
+    </form>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <td>
+                    <a href="#" ng-click="sortType = 'FullName'; sortReverse = !sortReverse">Full Name 
+                        <span ng-show="sortType == 'FullName' && !sortReverse" class="fa fa-caret-down"></span>
+                        <span ng-show="sortType == 'FullName' && sortReverse" class="fa fa-caret-up"></span>
+                    </a>
+                </td>
+                <td>
+                    <a href="#" ng-click="sortType = 'EmployeeID'; sortReverse = !sortReverse">Employee ID 
+                        <span ng-show="sortType == 'EmployeeID' && !sortReverse" class="fa fa-caret-down"></span>
+                        <span ng-show="sortType == 'EmployeeID' && sortReverse" class="fa fa-caret-up"></span>
+                    </a>
+                </td>
+                <td>
+                    <a href="#" ng-click="sortType = 'UserName'; sortReverse = !sortReverse">User Name
+                        <span ng-show="sortType == 'UserName' && !sortReverse" class="fa fa-caret-down"></span>
+                        <span ng-show="sortType == 'UserName' && sortReverse" class="fa fa-caret-up"></span>
+                    </a>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="todo in filteredTodos | orderBy:sortType:sortReverse | filter:searchFish">
+                <td>{{ todo.FullName }}</td>
+                <td>{{ todo.EmployeeID }}</td>
+                <td>{{ todo.UserName }}</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    
+
+    <div data-pagination="" data-num-pages="numPages()" data-current-page="currentPage" data-max-size="maxSize" data-boundary-links="true"></div>
+</body>
+
+</html>
